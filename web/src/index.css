@@ -1,0 +1,136 @@
+/* ============================================================
+   Ridgeline design tokens
+   ============================================================ */
+@import "tailwindcss";
+
+@theme {
+  /* Light mode (default) */
+  --color-canvas: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #eceef2;
+  --color-line: #e0e2e8;
+  --color-ink: #1a1d24;
+  --color-muted: #666b78;
+
+  --color-indigo-50: #eef0ff;
+  --color-indigo-500: #4f52d6;
+  --color-indigo-600: #4143b8;
+  --color-indigo-900: #232566;
+
+  --color-amber: #b3720a;
+  --color-amber-soft: #fbeed2;
+  --color-emerald: #157a4f;
+  --color-emerald-soft: #d9f2e6;
+  --color-rose: #b3323f;
+  --color-rose-soft: #fbdde1;
+  --color-slate-soft: #e7e9ee;
+
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+/* ── Light mode ── */
+:root {
+  --bg-canvas:    #f4f5f7;
+  --bg-surface:   #ffffff;
+  --bg-surface-2: #eceef2;
+  --border-line:  #e0e2e8;
+  --text-ink:     #1a1d24;
+  --text-muted:   #666b78;
+  --sidebar-bg:   #232566;
+}
+
+/* ── Dark mode ── */
+[data-theme="dark"] {
+  --bg-canvas:    #0f1117;
+  --bg-surface:   #1a1d27;
+  --bg-surface-2: #22263a;
+  --border-line:  #2e3250;
+  --text-ink:     #e8eaf2;
+  --text-muted:   #8b90a8;
+  --sidebar-bg:   #13152a;
+
+  --color-canvas:    #0f1117;
+  --color-surface:   #1a1d27;
+  --color-surface-2: #22263a;
+  --color-line:      #2e3250;
+  --color-ink:       #e8eaf2;
+  --color-muted:     #8b90a8;
+
+  --color-indigo-50:  #1e2147;
+  --color-amber-soft: #3a2a0a;
+  --color-emerald-soft: #0d2b1e;
+  --color-rose-soft:  #2e1117;
+  --color-slate-soft: #22263a;
+
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Dark mode sidebar uses sidebar-bg variable */
+[data-theme="dark"] aside,
+[data-theme="dark"] .sidebar-bg {
+  background-color: var(--sidebar-bg) !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-indigo-500);
+  outline-offset: 2px;
+}
+
+table { border-collapse: collapse; width: 100%; }
+
+.scrollbar-thin { scrollbar-width: thin; }
+
+/* Line-clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Skeleton pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Slide-in toast animation */
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+.toast-enter { animation: slideIn 0.3s ease forwards; }
+
+/* Calendar grid helpers */
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+

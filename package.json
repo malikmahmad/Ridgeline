@@ -1,0 +1,15 @@
+{
+  "name": "ridgeline",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ridgeline — project management & team collaboration platform.",
+  "type": "module",
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix web",
+    "build":       "npm run build --prefix web",
+    "seed":        "node server/src/db/seed.js",
+    "dev:server":  "npm run dev --prefix server",
+    "dev:web":     "npm run dev --prefix web",
+    "start":       "node server/src/server.js"
+  }
+}

@@ -1,0 +1,26 @@
+node_modules/
+*/node_modules/
+
+dist/
+*/dist/
+
+.env
+.env.local
+*/.env
+*/.env.local
+
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+npm-debug.log*
+*.log
+
+# SQLite file — use Turso in production; kept locally but not committed
+server/data/*.sqlite
+server/data/*.db
+server/data/uploads/
+
+# Vercel
+.vercel/
