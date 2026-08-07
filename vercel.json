@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm run install:all && npm run build",
+  "installCommand": "npm install && npm install --prefix web",
+  "buildCommand": "npm run build --prefix web",
   "outputDirectory": "web/dist",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index" },
@@ -8,7 +9,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "memory": 512,
+      "memory": 1024,
       "maxDuration": 30
     }
   },
