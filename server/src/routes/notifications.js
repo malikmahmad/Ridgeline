@@ -18,6 +18,12 @@ export function pushToUser(userId, payload) {
 }
 
 router.get("/stream", async (req, res) => {
+  if (process.env.VERCEL) {
+    return res.status(501).json({
+      error: "Real-time stream is disabled in serverless deployments. The app uses polling instead.",
+    });
+  }
+
   const token = req.query.token;
   if (!token) return res.status(401).end();
   let payload;

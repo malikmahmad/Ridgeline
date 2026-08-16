@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
-  Bell, CalendarDays, Clock, FolderKanban, LayoutDashboard,
+  Bell, CalendarDays, Clock, FileCheck2, FolderKanban, LayoutDashboard,
   ListTodo, LogOut, Menu, Moon, Mountain, Sun, User, Users, X,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
@@ -27,6 +27,7 @@ const NAV_BY_ROLE = {
     { label: "Dashboard",  to: "/",          icon: LayoutDashboard, end: true },
     { label: "My Tasks",   to: "/my-tasks",   icon: ListTodo },
     { label: "My Projects",to: "/projects",   icon: FolderKanban },
+    { label: "Submissions",to: "/submissions", icon: FileCheck2 },
     { label: "Calendar",   to: "/calendar",   icon: CalendarDays },
   ],
 };
@@ -60,10 +61,19 @@ export default function AppLayout() {
     return () => { cancelled = true; clearInterval(iv); };
   }, []);
 
-  // Real-time notifications via Server-Sent Events
+  // Real-time notifications via SSE are not supported on Vercel/serverless deployments.
+  // We use polling instead to avoid 30s timeouts on long-lived stream connections.
   useEffect(() => {
     const token = getToken();
     if (!token) return;
+
+    const isServerlessHost =
+      window.location.hostname.includes("vercel.app") ||
+      window.location.hostname.includes("netlify.app") ||
+      window.location.hostname.includes("render.com") ||
+      window.location.hostname.includes("azurestaticapps.net");
+
+    if (isServerlessHost) return;
 
     const url = `/api/notifications/stream?token=${encodeURIComponent(token)}`;
     const es = new EventSource(url);

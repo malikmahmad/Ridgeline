@@ -3,22 +3,16 @@
   "installCommand": "npm install && npm install --prefix web",
   "buildCommand": "npm run build --prefix web",
   "outputDirectory": "web/dist",
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
   "functions": {
     "api/index.js": {
       "memory": 1024,
       "maxDuration": 30
     }
   },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" },
+    { "source": "/((?!api|assets|_next|favicon|.*\\.).*)", "destination": "/index.html" }
+  ],
   "env": {
     "NODE_ENV": "production",
     "TURSO_DATABASE_URL": "libsql://ridgeline-itzxahmiii11.aws-ap-south-1.turso.io",

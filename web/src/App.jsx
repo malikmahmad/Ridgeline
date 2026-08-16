@@ -11,6 +11,7 @@ import Notifications from "./pages/shared/Notifications";
 import Profile       from "./pages/shared/Profile";
 import Timeline      from "./pages/shared/Timeline";
 import Calendar      from "./pages/shared/Calendar";
+import Submissions   from "./pages/shared/Submissions";
 import NotFound      from "./pages/shared/NotFound";
 import MyTasks       from "./pages/member/MyTasks";
 import Users         from "./pages/admin/Users";
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="notifications" element={<Notifications />} />
         <Route path="profile"     element={<Profile />} />
         <Route path="calendar"    element={<Calendar />} />
+        <Route path="submissions" element={<Submissions />} />
 
         <Route
           path="timeline"
