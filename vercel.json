@@ -4,8 +4,8 @@
   "buildCommand": "npm run build --prefix web",
   "outputDirectory": "web/dist",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" },
-    { "source": "/(.*)",     "destination": "/index.html" }
+    { "source": "/api/:path*", "destination": "/api/index" },
+    { "source": "/:path*",     "destination": "/index.html" }
   ],
   "functions": {
     "api/index.js": {
